@@ -1,4 +1,4 @@
-# goda-cmp-ext-vsnip.vim
+# goda-cmp-ext-vsnip
 
 > [!NOTE]
 > goda-cmp.vim itself is under active development, so the API of this plugin
@@ -27,7 +27,7 @@ as a Vim plugin.
 ## Installation
 
 ```sh
-go get github.com/yoshphys/goda-cmp-ext-vsnip.vim@latest
+go get github.com/yoshphys/goda-cmp-ext-vsnip@latest
 ```
 
 ## Configuration
@@ -35,7 +35,7 @@ go get github.com/yoshphys/goda-cmp-ext-vsnip.vim@latest
 ```go
 import (
 	"github.com/Shougo/goda-cmp.vim/cmp"
-	"github.com/yoshphys/goda-cmp-ext-vsnip.vim/ext/source/vsnip"
+	"github.com/yoshphys/goda-cmp-ext-vsnip/ext/source/vsnip"
 )
 
 func main() {

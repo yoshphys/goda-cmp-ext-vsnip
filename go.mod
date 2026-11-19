@@ -1,4 +1,4 @@
-module github.com/yoshphys/goda-cmp-ext-vsnip.vim
+module github.com/yoshphys/goda-cmp-ext-vsnip
 
 go 1.27.3
 
