@@ -7,9 +7,11 @@
 A [goda-cmp.vim](https://github.com/Shougo/goda-cmp.vim) source for the
 snippets [hrsh7th/vim-vsnip](https://github.com/hrsh7th/vim-vsnip) finds for
 the buffer: a port of the completion items `vsnip#get_complete_items()`
-builds for other completion engines (ddc.vim, asyncomplete.vim, ...), using
-vsnip's own convention (`kind` "Snippet", `menu` `"[v] {description or
-label}"`).
+builds for other completion engines (ddc.vim, asyncomplete.vim, ...). `Kind`
+is vsnip's own "Snippet"; unlike vsnip's own convention, `Menu` is left empty
+for `SourceOption.Mark` to set (as most goda-cmp-ext sources do) and the
+description goes to `Info` instead, so your configuration controls the
+inline tag rather than it being baked in here.
 
 Accepting a candidate removes the prefix goda-cmp just inserted and expands
 the snippet with `vsnip#anonymous({body}, {'prefix': word})`, exactly as

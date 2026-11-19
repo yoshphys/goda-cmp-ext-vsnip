@@ -1,8 +1,11 @@
 // Package vsnip is a goda-cmp source for the snippets hrsh7th/vim-vsnip
 // finds for the buffer (vsnip#source#find): a port of the completion items
 // vsnip#get_complete_items() builds for other completion engines (ddc.vim,
-// asyncomplete.vim, ...), the same convention vim-vsnip documents (kind
-// "Snippet", menu "[v] {description or label}").
+// asyncomplete.vim, ...). Kind is vsnip's own "Snippet"; unlike vsnip's own
+// convention, Menu is left for SourceOption.Mark to set (as most goda-cmp-
+// ext sources do) and the description goes to Info instead, so a
+// configuration controls the inline tag itself rather than it being baked
+// in here.
 //
 // Accepting a candidate removes the prefix goda-cmp just inserted and
 // expands the snippet with vsnip#anonymous({body}, {'prefix': word}),
@@ -55,9 +58,9 @@ func (source) Gather(ctx context.Context, h sdk.Host, c *cmp.Context) (cmp.Gathe
 	var items []cmp.Item
 	for _, group := range groups {
 		for _, sn := range group {
-			menu := sn.Description
-			if menu == "" {
-				menu = sn.Label
+			info := sn.Description
+			if info == "" {
+				info = sn.Label
 			}
 			body := strings.Join(sn.Body, "\n")
 			for _, prefix := range sn.Prefix {
@@ -68,7 +71,7 @@ func (source) Gather(ctx context.Context, h sdk.Host, c *cmp.Context) (cmp.Gathe
 				items = append(items, cmp.Item{
 					Word:     prefix,
 					Kind:     "Snippet",
-					Menu:     "[v] " + menu,
+					Info:     info,
 					Dup:      1,
 					UserData: body,
 				})

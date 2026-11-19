@@ -62,11 +62,11 @@ func TestGather(t *testing.T) {
 	if g.Start != 0 {
 		t.Errorf("Start = %d, want 0", g.Start)
 	}
-	var words, menus, kinds []string
+	var words, infos, kinds []string
 	var dups []int
 	for _, it := range g.Items {
 		words = append(words, it.Word)
-		menus = append(menus, it.Menu)
+		infos = append(infos, it.Info)
 		kinds = append(kinds, it.Kind)
 		dups = append(dups, it.Dup)
 	}
@@ -74,8 +74,15 @@ func TestGather(t *testing.T) {
 	if !reflect.DeepEqual(words, wantWords) {
 		t.Errorf("words = %q, want %q (duplicate prefix must be dropped)", words, wantWords)
 	}
-	if !reflect.DeepEqual(menus, []string{"[v] today", "[v] Class definition template."}) {
-		t.Errorf("menus = %q", menus)
+	// Falls back to label when description is empty ("today"); Menu is left
+	// to SourceOption.Mark, not set here.
+	if !reflect.DeepEqual(infos, []string{"today", "Class definition template."}) {
+		t.Errorf("infos = %q", infos)
+	}
+	for _, it := range g.Items {
+		if it.Menu != "" {
+			t.Errorf("Menu = %q, want empty (left to SourceOption.Mark)", it.Menu)
+		}
 	}
 	for _, k := range kinds {
 		if k != "Snippet" {
